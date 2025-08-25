@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Nos produits (pour l'exemple, on les met ici directement)
     const products = [
-        { id: 1, name: "T-shirt Coton", price: "25 €", image: "https://placehold.co/300x200/5e83b5/white?text=T-shirt" },
+        { id: 1, name: "T-shirt Coton", price: "25 €", image: "https://raw.githubusercontent.com/stephane15lopez-collab/T-l-gram/refs/heads/main/427-406-1.webp" },
         { id: 2, name: "Casquette Logo", price: "15 €", image: "https://placehold.co/300x200/a35eb5/white?text=Casquette" },
         { id: 3, name: "Mug Original", price: "12 €", image: "https://placehold.co/300x200/b55e68/white?text=Mug" },
         { id: 4, name: "Tote Bag", price: "18 €", image: "https://placehold.co/300x200/5eb56e/white?text=Tote+Bag" }
@@ -45,3 +45,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
