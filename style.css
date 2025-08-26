@@ -1,0 +1,208 @@
+/* --- Variables de couleur et de style --- */
+:root {
+    --primary-bg: #0F141E;
+    --secondary-bg: #1A202C;
+    --card-bg: #2D3748;
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0AEC0;
+    --accent-color: #FBBF24;
+    --border-color: #4A5568;
+    --button-bg: #4A5568;
+    --link-color: #63B3ED;
+}
+
+/* --- Styles de base --- */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 512px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- En-tête et Logo --- */
+header {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.logo {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Filtres (Menus déroulants) --- */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+select {
+    width: 50%;
+    background-color: var(--button-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+/* --- Grille et Cartes de produits --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.product-card {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-card-info {
+    padding: 1rem;
+}
+
+.product-card-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.product-card-info p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* --- Vue de détail du produit --- */
+.detail-header {
+    position: relative;
+    width: 100%;
+    height: 224px; /* 14rem */
+}
+
+.detail-img-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.detail-content {
+    background-color: var(--secondary-bg);
+    padding: 1rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.detail-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.detail-title-section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.detail-title-section p {
+    margin: 0.25rem 0 0 0;
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#detail-category-badge {
+    background-color: var(--button-bg);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+#detail-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.prices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
+    text-align: center;
+}
+
+.price-item {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.price-item .quantity {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.price-item .price {
+    display: block;
+    color: var(--link-color);
+}
