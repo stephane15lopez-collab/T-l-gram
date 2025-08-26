@@ -5,28 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogue Bot</title>
     
-    <!-- Intégration de Tailwind CSS pour un design rapide et moderne -->
+    <!-- Intégration de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Script officiel pour les Mini Apps Telegram -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
     <style>
-        /* Style pour la scrollbar (esthétique) */
-        ::-webkit-scrollbar {
-            width: 5px;
+        /* Styles personnalisés pour un meilleur rendu */
+        body {
+            background-color: #0F141E; /* Un fond un peu plus sombre que le gris-900 de base */
         }
-        ::-webkit-scrollbar-track {
-            background: #1a202c; /* bg-gray-800 */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4a5568; /* bg-gray-600 */
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #718096; /* bg-gray-500 */
-        }
-        /* Style pour les flèches des menus déroulants */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0F141E; }
+        ::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #718096; }
         select {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
             background-position: right 0.5rem center;
@@ -41,14 +34,11 @@
 </head>
 <body class="bg-gray-900 text-white font-sans antialiased">
 
-    <div id="app" class="container mx-auto max-w-lg p-4">
-
-        <!-- Section du logo -->
+    <!-- Vue principale : Grille des produits -->
+    <div id="main-view" class="container mx-auto max-w-lg p-4">
         <header class="flex justify-center py-4">
             <img src="https://placehold.co/100x100/1a202c/FFFF00?text=Logo" alt="Logo du Bot" class="w-24 h-24 rounded-full border-2 border-yellow-400 shadow-lg">
         </header>
-
-        <!-- Section des filtres (menus déroulants) -->
         <div class="filters flex justify-between gap-4 my-6">
             <select id="category-filter" class="w-1/2 bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
                 <option value="all">Toutes les catégories</option>
@@ -63,107 +53,184 @@
                 <option value="bio">Bio Farm</option>
             </select>
         </div>
-
-        <!-- Grille des produits -->
         <main id="product-grid" class="grid grid-cols-2 gap-4">
-            <!-- Les produits seront injectés ici par JavaScript -->
+            <!-- Les produits seront injectés ici -->
         </main>
-
     </div>
 
+    <!-- Vue détail du produit (initialement cachée) -->
+    <div id="detail-view" class="hidden container mx-auto max-w-lg">
+        <div class="relative">
+            <img id="detail-img" src="" alt="Image du produit" class="w-full h-56 object-cover">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <img src="https://placehold.co/100x100/1a202c/FFFF00?text=Logo" alt="Logo du Bot" class="w-24 h-24 rounded-full border-2 border-yellow-400 shadow-lg">
+            </div>
+        </div>
+        <div class="p-4 bg-gray-800 rounded-b-lg">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h2 id="detail-farm" class="text-2xl font-bold"></h2>
+                    <p id="detail-name" class="text-lg text-gray-300 flex items-center gap-2">
+                        <!-- Icone sera ici -->
+                    </p>
+                </div>
+                <span id="detail-category-badge" class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full"></span>
+            </div>
+            <div id="detail-description" class="text-gray-400 mb-6 space-y-2">
+                <!-- Description sera injectée ici -->
+            </div>
+            <div id="detail-prices" class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                <!-- Prix seront injectés ici -->
+            </div>
+        </div>
+    </div>
+
+
     <script>
-        // --- DONNÉES DE DÉMONSTRATION ---
-        // Dans une vraie application, ces données viendraient d'une base de données (API)
+        // --- DONNÉES DE DÉMONSTRATION AMÉLIORÉES ---
         const products = [
-            { id: 1, name: 'Nek Breaker', category: 'fleurs', farm: 'nektar', imageUrl: 'https://placehold.co/400x400/333/fff?text=Nek+Breaker' },
-            { id: 2, name: 'Brain Juice', category: 'huiles', farm: 'nektar', imageUrl: 'https://placehold.co/400x400/333/fff?text=Brain+Juice' },
-            { id: 3, name: 'Green Power', category: 'fleurs', farm: 'green', imageUrl: 'https://placehold.co/400x400/333/fff?text=Green+Power' },
-            { id: 4, name: 'Bio Hash', category: 'resines', farm: 'bio', imageUrl: 'https://placehold.co/400x400/333/fff?text=Bio+Hash' },
-            { id: 5, name: 'Golden Oil', category: 'huiles', farm: 'green', imageUrl: 'https://placehold.co/400x400/333/fff?text=Golden+Oil' },
-            { id: 6, name: 'Sweet Flower', category: 'fleurs', farm: 'bio', imageUrl: 'https://placehold.co/400x400/333/fff?text=Sweet+Flower' },
-            { id: 7, name: 'Dark Resin', category: 'resines', farm: 'nektar', imageUrl: 'https://placehold.co/400x400/333/fff?text=Dark+Resin' },
+            { id: 1, name: 'Nek Breaker', category: 'fleurs', farm: 'Nektar Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Nek+Breaker', description: '⚔️ Croisement : Non communiqué (sélection exclusive Nektar Farm)<br>👃 Terpènes : 🍇 raisin noir, 🍦 crème sucrée, 🍬 bonbon, ⛽ gaz rond, 🌿 végétal léger<br>😋 Goût : 🍇 raisin mûr, 🍦 texture crémeuse, 🍬 douceur candy, ⛽ gaz, 🌿 herbacé doux', prices: { '5g': 60, '10g': 100, '20g': 180, '50g': 400 } },
+            { id: 2, name: 'Brain Juice', category: 'huiles', farm: 'Nektar Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Brain+Juice', description: 'Description détaillée pour Brain Juice.', prices: { '1ml': 30, '2ml': 55, '5ml': 120 } },
+            { id: 3, name: 'Green Power', category: 'fleurs', farm: 'Green Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Green+Power', description: 'Description détaillée pour Green Power.', prices: { '5g': 50, '10g': 90, '20g': 160 } },
+            { id: 4, name: 'Bio Hash', category: 'resines', farm: 'Bio Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Bio+Hash', description: 'Description détaillée pour Bio Hash.', prices: { '3g': 45, '5g': 70, '10g': 130 } },
         ];
 
         // --- ÉLÉMENTS DU DOM ---
+        const mainView = document.getElementById('main-view');
+        const detailView = document.getElementById('detail-view');
         const productGrid = document.getElementById('product-grid');
         const categoryFilter = document.getElementById('category-filter');
         const farmFilter = document.getElementById('farm-filter');
 
         // --- FONCTIONS ---
 
-        /**
-         * Affiche les produits dans la grille
-         * @param {Array} productsToDisplay - Le tableau de produits à afficher
-         */
+        /** Affiche les produits dans la grille */
         function renderProducts(productsToDisplay) {
-            // On vide la grille avant de la remplir
             productGrid.innerHTML = '';
-
             if (productsToDisplay.length === 0) {
-                productGrid.innerHTML = `<p class="col-span-2 text-center text-gray-400 mt-8">Aucun produit ne correspond à votre recherche.</p>`;
+                productGrid.innerHTML = `<p class="col-span-2 text-center text-gray-400 mt-8">Aucun produit.</p>`;
                 return;
             }
-
-            // On crée une carte pour chaque produit
             productsToDisplay.forEach(product => {
                 const productCard = `
-                    <div class="product-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <div class="product-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer" data-product-id="${product.id}">
                         <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-40 object-cover">
                         <div class="p-4">
-                            <h3 class="font-bold text-lg flex items-center gap-2">
-                                <!-- Icônes SVG pour l'exemple -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                ${product.name}
-                            </h3>
-                            <p class="text-sm text-gray-400 mt-1">
-                                ${product.farm.charAt(0).toUpperCase() + product.farm.slice(1).replace(' farm', ' Farm')}
-                            </p>
+                            <h3 class="font-bold text-lg">${product.name}</h3>
+                            <p class="text-sm text-gray-400 mt-1">${product.farm}</p>
                         </div>
                     </div>
                 `;
                 productGrid.innerHTML += productCard;
             });
         }
+        
+        /** Affiche la vue de la grille et cache la vue de détail */
+        function showGridView() {
+            mainView.classList.remove('hidden');
+            detailView.classList.add('hidden');
+            // Gérer les boutons Telegram
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.BackButton.hide();
+                window.Telegram.WebApp.MainButton.hide();
+            }
+        }
 
-        /**
-         * Filtre les produits en fonction des sélections et les affiche
-         */
+        /** Affiche la vue de détail pour un produit spécifique */
+        function showDetailView(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            // Remplissage des informations du produit
+            document.getElementById('detail-img').src = product.imageUrl;
+            document.getElementById('detail-farm').textContent = product.farm;
+            document.getElementById('detail-name').innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                ${product.name}
+            `;
+            document.getElementById('detail-category-badge').textContent = product.category.toUpperCase();
+            document.getElementById('detail-description').innerHTML = product.description;
+            
+            // Remplissage des prix
+            const pricesContainer = document.getElementById('detail-prices');
+            pricesContainer.innerHTML = '';
+            for (const [quantity, price] of Object.entries(product.prices)) {
+                pricesContainer.innerHTML += `
+                    <div class="bg-gray-700 rounded-lg p-2">
+                        <span class="font-bold text-lg">${quantity}</span>
+                        <span class="text-blue-400">${price}€</span>
+                    </div>
+                `;
+            }
+
+            mainView.classList.add('hidden');
+            detailView.classList.remove('hidden');
+            window.scrollTo(0, 0); // Remonte en haut de la page
+
+            // Gérer les boutons Telegram
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.BackButton.show();
+                window.Telegram.WebApp.MainButton
+                    .setText(`Commander ${product.name}`)
+                    .show();
+            }
+        }
+
+        /** Filtre les produits et les affiche */
         function filterAndRender() {
             const selectedCategory = categoryFilter.value;
             const selectedFarm = farmFilter.value;
-
-            const filteredProducts = products.filter(product => {
-                const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
-                const farmMatch = selectedFarm === 'all' || product.farm === selectedFarm;
-                return categoryMatch && farmMatch;
-            });
-
+            const filteredProducts = products.filter(product => 
+                (selectedCategory === 'all' || product.category === selectedCategory) &&
+                (selectedFarm === 'all' || product.farm.toLowerCase().includes(selectedFarm))
+            );
             renderProducts(filteredProducts);
         }
 
         // --- ÉVÉNEMENTS & INITIALISATION ---
 
-        // On écoute les changements sur les filtres
+        // Clic sur une carte produit pour voir les détails
+        productGrid.addEventListener('click', (event) => {
+            const card = event.target.closest('.product-card');
+            if (card) {
+                const productId = parseInt(card.dataset.productId, 10);
+                showDetailView(productId);
+            }
+        });
+
+        // Changement sur les filtres
         categoryFilter.addEventListener('change', filterAndRender);
         farmFilter.addEventListener('change', filterAndRender);
         
-        // Initialisation de l'application Telegram
+        // Initialisation de l'API Telegram
         try {
             const tg = window.Telegram.WebApp;
-            // Informe le client Telegram que l'application est prête
             tg.ready(); 
-            // Change la couleur de fond pour correspondre au thème
-            tg.setHeaderColor('#1a202c');
-            tg.setBackgroundColor('#1a202c');
+            tg.expand(); // Agrandit la mini app
+            tg.setHeaderColor('#0F141E');
+            tg.setBackgroundColor('#0F141E');
+
+            // Gère le clic sur le bouton "Retour" de Telegram
+            tg.BackButton.onClick(showGridView);
+            
+            // Gère le clic sur le bouton principal (ex: "Commander")
+            tg.MainButton.onClick(() => {
+                tg.showAlert('La fonctionnalité de commande n\'est pas encore implémentée.');
+            });
+
         } catch (e) {
             console.error("L'API Telegram Web App n'est pas disponible.", e);
+            // Fallback pour le bouton retour si on teste dans un navigateur classique
+            const backButtonFallback = document.createElement('button');
+            backButtonFallback.innerHTML = '&larr; Retour (Navigateur)';
+            backButtonFallback.className = 'fixed top-4 left-4 bg-gray-700 p-2 rounded-lg z-10';
+            backButtonFallback.onclick = showGridView;
+            detailView.prepend(backButtonFallback);
         }
 
-
-        // Affichage initial de tous les produits au chargement de la page
+        // Affichage initial
         renderProducts(products);
 
     </script>
-
 </body>
 </html>
