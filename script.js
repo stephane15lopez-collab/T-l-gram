@@ -104,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedFarm = farmFilter.value;
         const filteredProducts = products.filter(product => 
             (selectedCategory === 'all' || product.category === selectedCategory) &&
-            (selectedFarm === 'all' || product.farm.toLowerCase().includes(selectedFarm))
+            // --- CORRECTION APPLIQUÉE ICI ---
+            (selectedFarm === 'all' || product.farm === selectedFarm)
         );
         renderProducts(filteredProducts);
     }
