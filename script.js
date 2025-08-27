@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const productGrid = document.getElementById('product-grid');
     const categoryFilter = document.getElementById('category-filter');
     const farmFilter = document.getElementById('farm-filter');
+    // On sélectionne le logo de la page de détail
+    const logoOverlay = document.querySelector('.logo-overlay');
 
     // --- FONCTIONS ---
 
@@ -44,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function showGridView() {
         mainView.classList.remove('hidden');
         detailView.classList.add('hidden');
+        // On s'assure que le logo sera de nouveau visible la prochaine fois
+        if (logoOverlay) logoOverlay.classList.remove('hidden');
+
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.BackButton.hide();
             window.Telegram.WebApp.MainButton.hide();
@@ -76,6 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         }
+        
+        // --- MODIFICATION ---
+        // On cache le logo de la page de détail
+        if (logoOverlay) logoOverlay.classList.add('hidden');
 
         mainView.classList.add('hidden');
         detailView.classList.remove('hidden');
