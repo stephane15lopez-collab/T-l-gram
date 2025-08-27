@@ -2,12 +2,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- DONNÉES DE DÉMONSTRATION ---
+    // MODIFICATION: "imageUrl" a été remplacé par "videoUrl" et "videoThumbnailUrl"
     const products = [
-        { id: 1, name: 'Tropi x Tangie', category: 'Fresh Frozen​', farm: 'Jerome Genetics', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Tropi+x+Tangie', description: '⚔️ Croisement : Non communiqué (sélection exclusive Jerome Genetics)<br>👃 Terpènes : 🍇 raisin noir, 🍦 crème sucrée, 🍬 bonbon, ⛽ gaz rond, 🌿 végétal léger<br>😋 Goût : 🍇 raisin mûr, 🍦 texture crémeuse', prices: { '5g': 60, '10g': 100, '20g': 180, '50g': 400 } },
-        { id: 2, name: 'Black Cherry', category: 'Double Static', farm: 'Shenzen Boyz', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Black+Cherry', description: 'Description détaillée pour Black Cherry.<br>👃 Terpènes :<br>😋 Goût :', prices: { '1g': 30, '2g': 50, '5g': 120 } },
-        { id: 3, name: 'Gelato 41', category: 'Frozen Shift', farm: 'Caliplates', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Gelato+41', description: 'Description détaillée pour Gelato 41.<br>👃 Terpènes :<br>😋 Goût :', prices: { '2g': 50, '5g': 110, '10g': 200 } },
-        { id: 4, name: 'Strawnana x Gusher', category: 'Plasma Static', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Strawnana+x+Gusher', description: 'Description détaillée pour Strawnana x Gusher.<br>👃 Terpènes :<br>😋 Goût :', prices: { '3g': 45, '5g': 70, '10g': 130 } },
-        { id: 5, name: 'Lemon Zlushi', category: 'Fleurs', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Lemon+Zlushi', description: 'Cali Hollandaise<br>👃 Terpènes :<br>😋 Goût :.', prices: { '5g': 60, '10g': 90, '15g': 130 } },
+        { id: 1, name: 'Tropi x Tangie', titleImageUrl: 'https://placehold.co/300x80/0F141E/FFFFFF?text=Tropi+x+Tangie', category: 'Fresh Frozen​', farm: 'Jerome Genetics', videoUrl: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4', videoThumbnailUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Tropi+x+Tangie', description: '⚔️ Croisement : Non communiqué (sélection exclusive Jerome Genetics)<br>👃 Terpènes : 🍇 raisin noir, 🍦 crème sucrée, 🍬 bonbon, ⛽ gaz rond, 🌿 végétal léger<br>😋 Goût : 🍇 raisin mûr, 🍦 texture crémeuse', prices: { '5g': 60, '10g': 100, '20g': 180, '50g': 400 } },
+        { id: 2, name: 'Black Cherry', titleImageUrl: 'https://placehold.co/300x80/0F141E/FFFFFF?text=Black+Cherry', category: 'Double Static', farm: 'Shenzen Boyz', videoUrl: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4', videoThumbnailUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Black+Cherry', description: 'Description détaillée pour Black Cherry.<br>👃 Terpènes :<br>😋 Goût :', prices: { '1g': 30, '2g': 50, '5g': 120 } },
+        { id: 3, name: 'Gelato 41', titleImageUrl: 'https://placehold.co/300x80/0F141E/FFFFFF?text=Gelato+41', category: 'Frozen Shift', farm: 'Caliplates', videoUrl: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4', videoThumbnailUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Gelato+41', description: 'Description détaillée pour Gelato 41.<br>👃 Terpènes :<br>😋 Goût :', prices: { '2g': 50, '5g': 110, '10g': 200 } },
     ];
 
     // --- ÉLÉMENTS DU DOM ---
@@ -16,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const productGrid = document.getElementById('product-grid');
     const categoryFilter = document.getElementById('category-filter');
     const farmFilter = document.getElementById('farm-filter');
-    // On sélectionne le logo de la page de détail
-    const logoOverlay = document.querySelector('.logo-overlay');
+    // Le conteneur pour la vidéo/image de la page de détail
+    const detailMediaContainer = document.getElementById('detail-media-container');
 
     // --- FONCTIONS ---
 
@@ -32,10 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'product-card';
             card.dataset.productId = product.id;
+            // MODIFICATION: On utilise la miniature de la vidéo pour la grille
             card.innerHTML = `
-                <img src="${product.imageUrl}" alt="${product.name}">
+                <img src="${product.videoThumbnailUrl}" alt="${product.name}">
                 <div class="product-card-info">
-                    <h3>${product.name}</h3>
+                    <img src="${product.titleImageUrl}" alt="${product.name}" style="height: 28px; margin-bottom: 5px;">
                     <p>${product.farm}</p>
                 </div>
             `;
@@ -47,8 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function showGridView() {
         mainView.classList.remove('hidden');
         detailView.classList.add('hidden');
-        // On s'assure que le logo sera de nouveau visible la prochaine fois
-        if (logoOverlay) logoOverlay.classList.remove('hidden');
+        
+        // On arrête toutes les vidéos qui pourraient être en lecture
+        const video = detailMediaContainer.querySelector('video');
+        if (video) {
+            video.pause();
+        }
 
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.BackButton.hide();
@@ -61,17 +65,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const product = products.find(p => p.id === productId);
         if (!product) return;
 
-        // Remplissage des informations
-        document.getElementById('detail-img').src = product.imageUrl;
+        // --- MODIFICATION MAJEURE : Création du lecteur vidéo ---
+        detailMediaContainer.innerHTML = ''; // On vide le conteneur
+
+        // On crée l'élément vidéo
+        const video = document.createElement('video');
+        video.src = product.videoUrl;
+        video.poster = product.videoThumbnailUrl; // Affiche la miniature avant la lecture
+        video.className = 'detail-img-background'; // On réutilise le style de l'image
+        video.controls = true; // Affiche les contrôles (play, pause, son...)
+        video.playsInline = true; // Important pour une bonne expérience sur mobile
+
+        // On crée le logo qui se superpose
+        const logo = document.createElement('img');
+        logo.src = "mon-logo.png"; // Mettez le chemin vers votre logo
+        logo.alt = "Logo du Bot";
+        logo.className = "logo-overlay";
+        
+        // On ajoute la vidéo et le logo au conteneur
+        detailMediaContainer.appendChild(video);
+        detailMediaContainer.appendChild(logo);
+        
+        // On cache le logo (comme demandé précédemment)
+        logo.classList.add('hidden');
+        // --- FIN DE LA MODIFICATION MAJEURE ---
+
         document.getElementById('detail-farm').textContent = product.farm;
         document.getElementById('detail-name').innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #F472B6;"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-            ${product.name}
+            <img src="${product.titleImageUrl}" alt="${product.name}" style="height: 40px; margin-top: 4px;">
         `;
         document.getElementById('detail-category-badge').textContent = product.category.toUpperCase();
         document.getElementById('detail-description').innerHTML = product.description;
         
-        // Remplissage des prix
         const pricesContainer = document.getElementById('detail-prices');
         pricesContainer.innerHTML = '';
         for (const [quantity, price] of Object.entries(product.prices)) {
@@ -83,15 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
         
-        // --- MODIFICATION ---
-        // On cache le logo de la page de détail
-        if (logoOverlay) logoOverlay.classList.add('hidden');
-
         mainView.classList.add('hidden');
         detailView.classList.remove('hidden');
         window.scrollTo(0, 0);
 
-        // Intégration Telegram
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.BackButton.show();
             window.Telegram.WebApp.MainButton.setText(`Commander ${product.name}`).show();
@@ -104,14 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedFarm = farmFilter.value;
         const filteredProducts = products.filter(product => 
             (selectedCategory === 'all' || product.category === selectedCategory) &&
-            // --- CORRECTION APPLIQUÉE ICI ---
             (selectedFarm === 'all' || product.farm === selectedFarm)
         );
         renderProducts(filteredProducts);
     }
 
     // --- ÉVÉNEMENTS & INITIALISATION ---
-
     productGrid.addEventListener('click', (event) => {
         const card = event.target.closest('.product-card');
         if (card) {
@@ -123,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
     categoryFilter.addEventListener('change', filterAndRender);
     farmFilter.addEventListener('change', filterAndRender);
     
-    // Initialisation de l'API Telegram
     try {
         const tg = window.Telegram.WebApp;
         tg.ready(); 
@@ -138,6 +155,5 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("L'API Telegram Web App n'est pas disponible.", e);
     }
 
-    // Affichage initial
     renderProducts(products);
 });
