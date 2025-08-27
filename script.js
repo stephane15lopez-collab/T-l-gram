@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- DONNÉES DE DÉMONSTRATION ---
     const products = [
-        { id: 1, name: 'Tropi x Tangie', category: 'FF', farm: 'Jerome Genetics', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Tropi+x+Tangie', description: '⚔️ Croisement : Non communiqué (sélection exclusive Jerome Genetics)<br>👃 Terpènes : 🍇 raisin noir, 🍦 crème sucrée, 🍬 bonbon, ⛽ gaz rond, 🌿 végétal léger<br>😋 Goût : 🍇 raisin mûr, 🍦 texture crémeuse', prices: { '5g': 60, '10g': 100, '20g': 180, '50g': 400 } },
+        { id: 1, name: 'Tropi x Tangie', category: 'Fresh Frozen🧊​', farm: 'Jerome Genetics', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Tropi+x+Tangie', description: '⚔️ Croisement : Non communiqué (sélection exclusive Jerome Genetics)<br>👃 Terpènes : 🍇 raisin noir, 🍦 crème sucrée, 🍬 bonbon, ⛽ gaz rond, 🌿 végétal léger<br>😋 Goût : 🍇 raisin mûr, 🍦 texture crémeuse', prices: { '5g': 60, '10g': 100, '20g': 180, '50g': 400 } },
         { id: 2, name: 'Black Cherry', category: 'Double Static', farm: 'Shenzen Boyz', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Black+Cherry', description: 'Description détaillée pour Black Cherry.<br>👃 Terpènes :<br>😋 Goût :', prices: { '1g': 30, '2g': 50, '5g': 120 } },
         { id: 3, name: 'Gelato 41', category: 'FrozenShift', farm: 'Caliplates', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Gelato+41', description: 'Description détaillée pour Gelato 41.<br>👃 Terpènes :<br>😋 Goût :', prices: { '2g': 50, '5g': 110, '10g': 200 } },
         { id: 4, name: 'Strawnana x Gusher', category: 'PlasmaStatic', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Strawnana+x+Gusher', description: 'Description détaillée pour Strawnana x Gusher.<br>👃 Terpènes :<br>😋 Goût :', prices: { '3g': 45, '5g': 70, '10g': 130 } },
-        { id: 5, name: 'Lemon Zlushi', category: 'fleurs', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Lemon+Zlushi', description: 'Cali Hollandaise<br>👃 Terpènes :<br>😋 Goût :.', prices: { '5g': 60, '10g': 90, '15g': 130 } },
+        { id: 5, name: 'Lemon Zlushi', category: 'Fleurs🍃', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Lemon+Zlushi', description: 'Cali Hollandaise<br>👃 Terpènes :<br>😋 Goût :.', prices: { '5g': 60, '10g': 90, '15g': 130 } },
     ];
 
     // --- ÉLÉMENTS DU DOM ---
