@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- DONNÉES DE DÉMONSTRATION ---
     const products = [
-        { id: 1, name: 'Nek Breaker', category: 'fleurs', farm: 'Nektar Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Nek+Breaker', description: '⚔️ Croisement : Non communiqué (sélection exclusive Nektar Farm)<br>👃 Terpènes : 🍇 raisin noir, 🍦 crème sucrée, 🍬 bonbon, ⛽ gaz rond, 🌿 végétal léger<br>😋 Goût : 🍇 raisin mûr, 🍦 texture crémeuse, 🍬 douceur candy, ⛽ gaz, 🌿 herbacé doux', prices: { '5g': 60, '10g': 100, '20g': 180, '50g': 400 } },
-        { id: 2, name: 'Brain Juice', category: 'huiles', farm: 'Nektar Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Brain+Juice', description: 'Description détaillée pour Brain Juice.', prices: { '1g': 30, '2g': 55, '5g': 120 } },
-        { id: 3, name: 'Green Power', category: 'fleurs', farm: 'Green Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Green+Power', description: 'Description détaillée pour Green Power.', prices: { '5g': 50, '10g': 90, '20g': 160 } },
-        { id: 4, name: 'Bio Hash', category: 'resines', farm: 'Bio Farm', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Bio+Hash', description: 'Description détaillée pour Bio Hash.', prices: { '3g': 45, '5g': 70, '10g': 130 } },
-        { id: 5, name: 'Yellow Zlushi', category: 'fleurs', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Bio+Hash', description: 'Cali Hollandaise.', prices: { '5g': 60, '10g': 90, '10g': 130 } },
+        { id: 1, name: 'Tropi x Tangie', category: 'Fresh Frozen', farm: 'Jerome Genetics', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Tropi+x+Tangie', description: '⚔️ Croisement : Non communiqué (sélection exclusive Jerome Genetics)<br>👃 Terpènes : 🍇 raisin noir, 🍦 crème sucrée, 🍬 bonbon, ⛽ gaz rond, 🌿 végétal léger<br>😋 Goût : 🍇 raisin mûr, 🍦 texture crémeuse', prices: { '5g': 60, '10g': 100, '20g': 180, '50g': 400 } },
+        { id: 2, name: 'Black Cherry', category: 'Double static', farm: 'Shenzen Boyz', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Black+Cherry', description: 'Description détaillée pour Black Cherry.<br>👃 Terpènes :<br>😋 Goût :', prices: { '1g': 30, '2g': 50, '5g': 120 } },
+        { id: 3, name: 'Gelato 41', category: 'Frozen Shift', farm: 'Caliplates', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Gelato+41', description: 'Description détaillée pour Gelato 41.<br>👃 Terpènes :<br>😋 Goût :', prices: { '2g': 50, '5g': 110, '10g': 200 } },
+        { id: 4, name: 'Strawnana x Gusher', category: 'Plasma Static', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Strawnana+x+Gusher', description: 'Description détaillée pour Strawnana x Gusher.<br>👃 Terpènes :<br>😋 Goût :', prices: { '3g': 45, '5g': 70, '10g': 130 } },
+        { id: 5, name: 'Lemon Zlushi', category: 'fleurs', farm: 'CH3', imageUrl: 'https://placehold.co/600x400/2c3e50/ecf0f1?text=Lemon+Zlushi', description: 'Cali Hollandaise<br>👃 Terpènes :<br>😋 Goût :.', prices: { '5g': 60, '10g': 90, '15g': 130 } },
     ];
 
     // --- ÉLÉMENTS DU DOM ---
