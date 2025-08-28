@@ -190,24 +190,4 @@ main.fade-out {
     color: white;
     border-color: var(--accent-color);
 }
-/* --- Style du bouton de commande --- */
-.order-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin-top: 2rem; /* Espace au-dessus du bouton */
-    background-color: var(--accent-color); /* Utilise la couleur d'accentuation violette */
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: var(--border-radius);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
 
-.order-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px var(--glow-color); /* Effet lumineux au survol */
-}
