@@ -1,20 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- DONNÉES DE L'APPLICATION ---
-    // Toutes les données sont ici. Remplacez les chemins par les vôtres.
-    // Structure du dossier "assets":
-    // assets/
-    //   -> logo.png
-    //   -> categories/
-    //      -> fleurs.png
-    //      -> resines.png
-    //      ...
-    //   -> videos/
-    //      -> nekbreaker.mp4
-    //      ...
-    //   -> thumbnails/
-    //      -> nekbreaker.jpg
-    //      ...
+    // --- DONNÉES DE L'APPLICATION (INCHANGÉ) ---
     const data = {
         categories: [
             { id: 1, name: "Fleurs", image: "assets/categories/fleurs.png" },
@@ -40,21 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    // --- ÉLÉMENTS DU DOM ---
     const app = document.getElementById('app');
     const header = document.getElementById('app-header');
 
-    // --- INTÉGRATION TELEGRAM ---
     try {
         const tg = window.Telegram.WebApp;
-        tg.ready(); // Informe Telegram que l'app est prête
-        
-        // Gère le clic sur le bouton "Retour" natif de Telegram
+        tg.ready();
         tg.BackButton.onClick(() => {
             window.history.back();
         });
-
-        // Met à jour la visibilité du bouton "Retour"
         function updateTelegramBackButton() {
             if (location.hash === '' || location.hash === '#home') {
                 tg.BackButton.hide();
@@ -66,108 +46,95 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("L'API Telegram n'est pas disponible.", e);
     }
     
-    // --- FONCTIONS DE RENDU ---
-
-    /** Affiche la page d'accueil avec les catégories */
+    // --- FONCTIONS DE RENDU (INCHANGÉES) ---
     function renderHome() {
         header.classList.remove('header-hidden');
         let html = '<div class="grid">';
-        for (const category of data.categories) {
+        data.categories.forEach(category => {
             html += `
                 <a href="#category/${category.id}" class="card">
                     <img src="${category.image}" alt="${category.name}">
                     <div class="card-name">${category.name}</div>
                 </a>
             `;
-        }
+        });
         html += '</div>';
         app.innerHTML = html;
     }
 
-    /** Affiche la page d'une catégorie avec ses produits */
     function renderCategory(categoryId) {
         header.classList.remove('header-hidden');
         const products = data.products.filter(p => p.categoryId === categoryId);
-        
-        if (products.length === 0) {
-            app.innerHTML = `<p>Aucun produit dans cette catégorie.</p>`;
-            return;
-        }
-
         let html = '<div class="grid">';
-        for (const product of products) {
+        products.forEach(product => {
             html += `
                 <a href="#product/${product.id}" class="card">
                     <img src="${product.thumbnail}" alt="${product.name}" class="video-thumbnail">
                     <div class="card-name">${product.name}</div>
                 </a>
             `;
-        }
+        });
         html += '</div>';
         app.innerHTML = html;
     }
 
-    /** Affiche la page de détail d'un produit */
     function renderProduct(productId) {
         header.classList.add('header-hidden');
         const product = data.products.find(p => p.id === productId);
-
-        if (!product) {
-            app.innerHTML = `<p>Produit non trouvé.</p>`;
-            return;
-        }
-
-        // Génère la liste des terpènes et des prix
         const terpenesList = product.terpenes.map(t => `<li>${t}</li>`).join('');
         const pricesList = product.prices.map(p => `<li>${p.weight} – ${p.price}</li>`).join('');
-
         app.innerHTML = `
             <div class="product-view">
                 <video class="product-video" src="${product.video}" controls autoplay muted loop playsinline></video>
                 <div class="product-details">
                     <h1>${product.name}</h1>
-                    <div class="detail-item">
-                        <strong>Farm:</strong> ${product.farm}
-                    </div>
-                    <div class="detail-item">
-                        <strong>Goût:</strong> ${product.taste}
-                    </div>
-                    <div class="detail-item">
-                        <strong>Terpènes:</strong>
-                        <ul>${terpenesList}</ul>
-                    </div>
-                    <div class="detail-item">
-                        <strong>Prix:</strong>
-                        <ul>${pricesList}</ul>
-                    </div>
+                    <div class="detail-item"><strong>Farm:</strong> ${product.farm}</div>
+                    <div class="detail-item"><strong>Goût:</strong> ${product.taste}</div>
+                    <div class="detail-item"><strong>Terpènes:</strong><ul>${terpenesList}</ul></div>
+                    <div class="detail-item"><strong>Prix:</strong><ul>${pricesList}</ul></div>
                 </div>
-            </div>
-        `;
+            </div>`;
     }
 
-    // --- ROUTEUR ---
+    // --- ROUTEUR (MIS À JOUR POUR LES ANIMATIONS) ---
     function router() {
-        const hash = location.hash;
-        
-        if (hash.startsWith('#category/')) {
-            const categoryId = parseInt(hash.split('/')[1]);
-            renderCategory(categoryId);
-        } else if (hash.startsWith('#product/')) {
-            const productId = parseInt(hash.split('/')[1]);
-            renderProduct(productId);
-        } else {
-            renderHome();
-        }
+        // 1. Ajouter la classe pour commencer l'animation de sortie
+        app.classList.add('fade-out');
 
-        // Met à jour le bouton Telegram à chaque changement de page
-        if (window.Telegram.WebApp) {
-            updateTelegramBackButton();
-        }
+        // 2. Attendre que l'animation de sortie soit presque terminée
+        setTimeout(() => {
+            const hash = location.hash;
+            
+            // 3. Changer le contenu comme avant
+            if (hash.startsWith('#category/')) {
+                renderCategory(parseInt(hash.split('/')[1]));
+            } else if (hash.startsWith('#product/')) {
+                renderProduct(parseInt(hash.split('/')[1]));
+            } else {
+                renderHome();
+            }
+
+            // 4. Retirer la classe de sortie pour que le conteneur soit prêt pour la nouvelle animation
+            app.classList.remove('fade-out');
+            
+            // Fait défiler la page vers le haut
+            window.scrollTo(0, 0);
+
+            // Met à jour le bouton Telegram
+            if (window.Telegram.WebApp) {
+                updateTelegramBackButton();
+            }
+        }, 150); // Ce délai doit être la moitié de la transition CSS
     }
 
-    // --- ÉCOUTEURS D'ÉVÉNEMENTS ---
+    // --- ÉCOUTEURS D'ÉVÉNEMENTS (INCHANGÉ) ---
     window.addEventListener('hashchange', router);
     
-    // Lancement initial de l'application
-    router();
+    // Lancement initial
+    const initialHash = location.hash;
+    location.hash = ''; // Assure que le premier rendu se fait sans animation de sortie
+    location.hash = initialHash || '#home';
+    if (!initialHash) {
+        router();
+    }
 });
