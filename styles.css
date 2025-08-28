@@ -47,8 +47,13 @@ main.fade-out {
 }
 
 .logo {
-    max-width: 160px;
-    height: auto;
+    max-width: 160px; /* Conservez la taille que vous voulez */
+    height: 160px;   /* NOUVEAU: Définir une hauteur égale à la largeur pour un cercle parfait */
+    border-radius: 50%; /* NOUVEAU: Rend l'image parfaitement ronde */
+    object-fit: cover;  /* NOUVEAU: S'assure que l'image remplit le cercle sans être étirée */
+    /* NOUVEAU: Optionnel, pour ajouter une petite bordure blanche autour du logo */
+    border: 2px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 0 15px rgba(135, 116, 225, 0.4); /* NOUVEAU: Ombre pour le faire ressortir */
 }
 
 .header-hidden {
