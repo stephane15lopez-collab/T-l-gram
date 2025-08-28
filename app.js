@@ -22,6 +22,27 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 102, categoryId: 2, name: "Purple Haze", video: "assets/videos/purplehaze.mp4", thumbnail: "assets/thumbnails/purplehaze.jpg", farm: "Green Valley", taste: "Baies sucrées, terreux, épicé", terpenes: ["Myrcène", "Caryophyllène"], prices: [{ weight: "3g", price: "45€" }, { weight: "5g", price: "70€" }] },
             { id: 201, categoryId: 1, name: "Royal Hash", video: "assets/videos/royalhash.mp4", thumbnail: "assets/thumbnails/royalhash.jpg", farm: "Desert Kings", taste: "Épicé, pin, terreux", terpenes: ["Pinène", "Humulène"], prices: [{ weight: "2g", price: "30€" }, { weight: "5g", price: "65€" }] },
             { id: 202, categoryId: 1, name: "Afghan Gold", video: "assets/videos/afghangold.mp4", thumbnail: "assets/thumbnails/afghangold.jpg", farm: "Hindu Kush Masters", taste: "Boisé, floral, sucré", terpenes: ["Linalol", "Myrcène"], prices: [{ weight: "2g", price: "35€" }, { weight: "5g", price: "75€" }] },
+            {
+  // 1. Donnez-lui un nouvel `id` unique
+  id: 103,
+  
+  // 2. Indiquez l'ID de la catégorie (ex: 2 pour "Weed")
+  categoryId: 2, 
+  
+  // 3. Remplissez les infos du produit
+  name: "Amnesia Haze",
+  farm: "Dutch Passion",
+  taste: "Agrumes, Citron, Terreux",
+  terpenes: ["Limonène", "Myrcène"],
+  prices: [
+    { weight: "5g", price: "70€" },
+    { weight: "10g", price: "120€" }
+  ],
+  
+  // 4. LE PLUS IMPORTANT : Indiquez les bons chemins
+  video: "assets/videos/amnesia_haze.mp4",
+  thumbnail: "assets/thumbnails/amnesia_haze.jpg"
+},
             // --- Ajoutez ici vos produits pour Neige (id:3), Extazy (id:4), etc. ---
             { id: 301, categoryId: 3, name: "Flocon Pur", video: "assets/videos/flocon.mp4", thumbnail: "assets/thumbnails/flocon.jpg", farm: "Alps Lab", taste: "Neutre", terpenes: ["Haute pureté"], prices: [{ weight: "1g", price: "80€" }] },
             { id: 401, categoryId: 4, name: "MDMA Pills", video: "assets/videos/pills.mp4", thumbnail: "assets/thumbnails/pills.jpg", farm: "Party Time Inc.", taste: "Amère", terpenes: ["N/A"], prices: [{ weight: "1 pc", price: "10€" }, { weight: "5 pcs", price: "40€" }] },
