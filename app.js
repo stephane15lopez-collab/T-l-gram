@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 prices: [{ weight: "2g", price: "35€" }, { weight: "5g", price: "75€" }] 
             },
             { 
-                id: 201, categoryId: 1, name: "Gary Payton🏀",
+                id: 203, categoryId: 1, name: "Gary Payton🏀",
                 video: "assets/videos/gary_payton.mp4", thumbnail: "assets/thumbnails/gary_payton.jpg",
                 farm: "Frosty Hash",
                 type: "WPFF",
