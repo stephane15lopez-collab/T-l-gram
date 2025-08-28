@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+ const TELEGRAM_CONTACT = "votrenomdutilisateur"; // <--- REMPLACEZ CECI
+    
     // --- DONNÉES DE L'APPLICATION ---
     const data = {
         categories: [
