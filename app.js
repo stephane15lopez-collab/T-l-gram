@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
- const TELEGRAM_CONTACT = "votrenomdutilisateur"; // <--- REMPLACEZ CECI
+ const TELEGRAM_CONTACT = "fernandonewdrop"; // <--- REMPLACEZ CECI
     
     // --- DONNÉES DE L'APPLICATION ---
     const data = {
