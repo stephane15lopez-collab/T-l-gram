@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
- const TELEGRAM_CONTACT = "fernandonewdrop"; // <--- REMPLACEZ CECI
-    
+
     // --- DONNÉES DE L'APPLICATION ---
     const data = {
         categories: [
@@ -177,24 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         }
-
-        app.innerHTML = `
-            <div class="product-view">
-                <video class="product-video" src="${product.video}" controls autoplay muted loop playsinline></video>
-                <div class="product-details">
-                    <h1>${product.name}</h1>
-                    <div class="detail-item"><strong>Farm:</strong> ${product.farm}</div>
-                    ${typeHtml}
-                    <div class="detail-item"><strong>Goût:</strong> ${product.taste}</div>
-                    <div class="detail-item"><strong>Infos:</strong><ul>${terpenesList}</ul></div>
-                    <div class="detail-item"><strong>Prix:</strong><ul>${pricesList}</ul></div>
-
-                    <a href="https://t.me/${TELEGRAM_CONTACT}" target="_blank" class="order-button">
-                        Commander sur Telegram 🚀
-                    </a>
-                </div>
-            </div>`;
-    }
 
         app.innerHTML = `
             <div class="product-view">
