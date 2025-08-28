@@ -15,14 +15,19 @@
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 1.5rem; /* Plus d'espace pour respirer */
-    /* NOUVEAU : Fond en dégradé subtil */
-    background: radial-gradient(circle at top, #212529, var(--primary-bg));
-    background-attachment: fixed;
+    padding: 1.5rem;
     color: var(--text-color);
     overscroll-behavior-y: none;
+    
+    /* --- PROPRIÉTÉS POUR L'ARRIÈRE-PLAN --- */
+    background-image: 
+    linear-gradient(rgba(17, 19, 21, 0.85), rgba(17, 19, 21, 0.85)),
+    url('assets/background.jpg'); /* Chemin vers votre image */
+    background-size: cover;          /* L'image couvre tout l'écran, sans se déformer */
+    background-position: center;     /* L'image est bien centrée */
+    background-attachment: fixed;    /* L'image reste fixe quand on fait défiler la page */
+    background-repeat: no-repeat;    /* L'image ne se répète pas */
 }
-
 /* --- NOUVEAU : Animations de transition de page --- */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
