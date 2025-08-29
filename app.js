@@ -14,12 +14,41 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 6, name: "Revendeur", image: "assets/categories/Revendeur.png" },
         ],
         products: [
+            // --- WEED ---
             { id: 102, categoryId: 2, name: "Purple Haze", video: "assets/videos/purplehaze.mp4", thumbnail: "assets/thumbnails/purplehaze.jpg", farm: "Green Valley", taste: "Baies sucrées, terreux, épicé", terpenes: ["Myrcène", "Caryophyllène"], prices: [{ weight: "3g", price: "45€" }, { weight: "5g", price: "70€" }] },
             { id: 104, categoryId: 2, name: "Lemon Zlushi", video: "assets/videos/lemon_zlushi.mp4", thumbnail: "assets/thumbnails/lemon_zlushi.jpg", farm: "Cookies Farm", taste: "Gazeux, Poivré, Abricot, Terreux", terpenes: ["Caryophyllène", "Limonène", "Humulène"], prices: [{ weight: "5g", price: "80€" }, { weight: "10g", price: "140€" }] },
             { id: 103, categoryId: 2, name: "Amnesia Haze", video: "assets/videos/amnesia_haze.mp4",thumbnail: "assets/thumbnails/amnesia_haze.jpg", farm: "Dutch Passion", taste: "Agrumes, Citron, Terreux", terpenes: ["Limonène", "Myrcène"], prices: [{ weight: "5g", price: "70€" },{ weight: "10g", price: "120€" }] },
-            { id: 201, categoryId: 1, name: "Royal Hash", video: "assets/videos/royalhash.mp4", thumbnail: "assets/thumbnails/royalhash.jpg", farm: "Desert Kings", type: "Jaune Mousseux", taste: "Épicé, pin, terreux", terpenes: ["Pinène", "Humulène"], prices: [{ weight: "2g", price: "30€" }, { weight: "5g", price: "65€" }] },
-            { id: 202, categoryId: 1, name: "Afghan Gold", video: "assets/videos/afghangold.mp4", thumbnail: "assets/thumbnails/afghangold.jpg", farm: "Hindu Kush Masters", type: "Filtré x3", taste: "Boisé, floral, sucré", terpenes: ["Linalol", "Myrcène"], prices: [{ weight: "2g", price: "35€" }, { weight: "5g", price: "75€" }] },
-            { id: 203, categoryId: 1, name: "Gary Payton🏀", video: "assets/videos/gary_payton.mp4", thumbnail: "assets/thumbnails/gary_payton.jpg", farm: "Frosty Hash", type: "WPFF", taste: "Épicé, pin, terreux", terpenes: ["Pinène", "Humulène"], prices: [{ weight: "0,5g", price: "50€" }, { weight: "1g", price: "80€" }, { weight: "3g", price: "200€" }] },
+            
+            // --- HASH ---
+            { 
+                id: 201, categoryId: 1, name: "Royal Hash",
+                video: "assets/videos/royalhash.mp4", thumbnail: "assets/thumbnails/royalhash.jpg",
+                farm: "Desert Kings",
+                type: "Jaune Mousseux",
+                taste: "Épicé, pin, terreux",
+                terpenes: ["Pinène", "Humulène"],
+                prices: [{ weight: "2g", price: "30€" }, { weight: "5g", price: "65€" }] 
+            },
+            { 
+                id: 202, categoryId: 1, name: "Afghan Gold",
+                video: "assets/videos/afghangold.mp4", thumbnail: "assets/thumbnails/afghangold.jpg",
+                farm: "Hindu Kush Masters",
+                type: "Filtré x3",
+                taste: "Boisé, floral, sucré",
+                terpenes: ["Linalol", "Myrcène"],
+                prices: [{ weight: "2g", price: "35€" }, { weight: "5g", price: "75€" }] 
+            },
+            { 
+                id: 203, categoryId: 1, name: "Gary Payton🏀",
+                video: "assets/videos/gary_payton.mp4", thumbnail: "assets/thumbnails/gary_payton.jpg",
+                farm: "Frosty Hash",
+                type: "WPFF",
+                taste: "Épicé, pin, terreux",
+                terpenes: ["Pinène", "Humulène"],
+                prices: [{ weight: "0,5g", price: "50€" }, { weight: "1g", price: "80€" }, { weight: "3g", price: "200€" }] 
+            },
+
+            // --- AUTRES PRODUITS ---
             { id: 301, categoryId: 3, name: "Flocon Pur", video: "assets/videos/flocon.mp4", thumbnail: "assets/thumbnails/flocon.jpg", farm: "Alps Lab", taste: "Neutre", terpenes: ["Haute pureté"], prices: [{ weight: "1g", price: "80€" }] },
             { id: 401, categoryId: 4, name: "MDMA Pills", video: "assets/videos/pills.mp4", thumbnail: "assets/thumbnails/pills.jpg", farm: "Party Time Inc.", taste: "Amère", terpenes: ["N/A"], prices: [{ weight: "1 pc", price: "10€" }, { weight: "5 pcs", price: "40€" }] },
             { id: 501, categoryId: 5, name: "PROMO: Pack Découverte", video: "assets/videos/pack.mp4", thumbnail: "assets/thumbnails/pack.jpg", farm: "Multi-Farms", taste: "Mixte", terpenes: ["Variés"], prices: [{ weight: "Pack", price: "150€" }] },
@@ -32,12 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         const tg = window.Telegram.WebApp;
-        tg.ready(); // Informe Telegram que l'app est prête
-
-        // AJOUTÉ : Force la couleur des bandeaux Telegram en noir
-        tg.setHeaderColor('#111315'); // Bandeau du haut
-        tg.setBackgroundColor('#111315'); // Arrière-plan derrière l'app
-
+        tg.ready();
+        tg.setHeaderColor('#111315');
+        tg.setBackgroundColor('#111315');
         tg.BackButton.onClick(() => { window.history.back(); });
         function updateTelegramBackButton() {
             if (location.hash === '' || location.hash === '#home') {
@@ -104,9 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const hash = location.hash;
             if (hash.startsWith('#category/')) {
-                renderCategory(parseInt(hash.split('/[1]')));
+                renderCategory(parseInt(hash.split('/')[1]));
             } else if (hash.startsWith('#product/')) {
-                renderProduct(parseInt(hash.split('/[1]')));
+                renderProduct(parseInt(hash.split('/')[1]));
             } else {
                 renderHome();
             }
