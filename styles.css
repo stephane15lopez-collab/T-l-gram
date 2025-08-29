@@ -25,9 +25,157 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    padding-bottom: 80px; /* AJOUTÉ : Espace pour la barre de navigation */
+    padding-bottom: 80px; /* Espace pour la barre de navigation */
 }
-/* ... (le reste du CSS jusqu'à la fin) ... */
+
+/* --- Animations de transition de page --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+    animation: fadeIn var(--transition-speed) ease-out;
+}
+
+main.fade-out {
+    opacity: 0;
+    transition: opacity calc(var(--transition-speed) / 2) ease-in;
+}
+
+/* --- En-tête et Logo --- */
+#app-header {
+    text-align: center;
+    padding-bottom: 2rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.logo {
+    max-width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 0 15px rgba(135, 116, 225, 0.4);
+}
+
+.header-hidden {
+    display: none;
+}
+
+/* --- Grille principale (pour catégories et produits) --- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* --- Animation d'apparition des cartes --- */
+@keyframes cardAppear {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Style des Cartes (Amélioré) --- */
+.card {
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    cursor: pointer;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    animation: cardAppear 0.5s ease-out backwards;
+}
+
+.card:nth-child(2) { animation-delay: 0.05s; }
+.card:nth-child(3) { animation-delay: 0.1s; }
+.card:nth-child(4) { animation-delay: 0.15s; }
+.card:nth-child(5) { animation-delay: 0.2s; }
+.card:nth-child(6) { animation-delay: 0.25s; }
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 25px var(--shadow-color), 0 0 20px var(--glow-color);
+}
+
+.card img, .card .video-thumbnail {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-name {
+    padding: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: auto;
+}
+
+/* --- Page Produit (Améliorée) --- */
+.product-view {
+    padding-bottom: 2rem;
+}
+
+.product-video {
+    width: 100%;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    background-color: #000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.product-details h1 {
+    font-size: 2.2rem;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(45deg, var(--text-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.product-details .detail-item {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.product-details .detail-item strong {
+    color: var(--accent-color);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.product-details ul li {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    transition: all var(--transition-speed) ease;
+}
+
 .product-details ul li:hover {
     background-color: var(--accent-color);
     color: white;
@@ -56,7 +204,7 @@ body {
     box-shadow: 0 6px 20px var(--glow-color);
 }
 
-/* AJOUTÉ : Style de la barre de navigation en bas */
+/* Style de la barre de navigation en bas */
 #bottom-nav {
     position: fixed;
     bottom: 0;
@@ -99,4 +247,16 @@ body {
 /* Classe pour cacher des éléments */
 .hide {
     display: none !important;
+}
+
+/* Style pour la page d'infos */
+.info-page {
+    padding: 1rem;
+    line-height: 1.6;
+}
+
+.info-page h1 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
 }
