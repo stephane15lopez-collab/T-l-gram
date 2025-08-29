@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 3, name: "Neige", image: "assets/categories/neige.png" },
             { id: 4, name: "Extazy", image: "assets/categories/extazy.png" },
             { id: 5, name: "Promotions", image: "assets/categories/promotions.png" },
-            { id: 6, name: "Bosseur", image: "assets/categories/bosseur.png" },
+            { id: 6, name: "Revendeur", image: "assets/categories/Revendeur.png" },
         ],
         products: [
             // --- WEED ---
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 prices: [{ weight: "Pack", price: "150€" }]
             },
             {
-                id: 601, categoryId: 6, name: "Kit du Bosseur",
+                id: 601, categoryId: 6, name: "Kit du Revendeur",
                 video: "assets/videos/kit.mp4", thumbnail: "assets/thumbnails/kit.jpg",
                 farm: "WorkHard Co.",
                 taste: "Énergisant",
