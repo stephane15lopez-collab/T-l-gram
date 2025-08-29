@@ -187,8 +187,8 @@ main.fade-out {
 .order-button {
     display: block;
     width: 100%;
-    max-width: 300px; /* Définit une largeur maximale pour le bouton */
-    margin: 2rem auto 0 auto; /* MODIFIÉ : Centre le bouton horizontalement */
+    max-width: 250px; /* MODIFIÉ : Réduit la largeur maximale du bouton (était 300px) */
+    margin: 2rem auto 0 auto;
     padding: 15px;
     background-color: var(--accent-color);
     color: #ffffff;
