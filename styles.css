@@ -18,17 +18,17 @@ body {
     padding: 1.5rem;
     color: var(--text-color);
     overscroll-behavior-y: none;
-    
-    /* --- PROPRIÉTÉS POUR L'ARRIÈRE-PLAN --- */
     background-image: 
     linear-gradient(rgba(17, 19, 21, 0.85), rgba(17, 19, 21, 0.85)),
-    url('assets/background.png'); /* Chemin vers votre image */
-    background-size: contain;          /* L'image couvre tout l'écran, sans se déformer */
-    background-position: center;     /* L'image est bien centrée */
-    background-attachment: fixed;    /* L'image reste fixe quand on fait défiler la page */
-    background-repeat: no-repeat;    /* L'image ne se répète pas */
+    url('assets/background.jpg');
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    padding-bottom: 80px; /* Espace pour la barre de navigation */
 }
-/* --- NOUVEAU : Animations de transition de page --- */
+
+/* --- Animations de transition de page --- */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -43,7 +43,6 @@ main.fade-out {
     transition: opacity calc(var(--transition-speed) / 2) ease-in;
 }
 
-
 /* --- En-tête et Logo --- */
 #app-header {
     text-align: center;
@@ -52,13 +51,12 @@ main.fade-out {
 }
 
 .logo {
-    max-width: 160px; /* Conservez la taille que vous voulez */
-    height: 160px;   /* NOUVEAU: Définir une hauteur égale à la largeur pour un cercle parfait */
-    border-radius: 50%; /* NOUVEAU: Rend l'image parfaitement ronde */
-    object-fit: cover;  /* NOUVEAU: S'assure que l'image remplit le cercle sans être étirée */
-    /* NOUVEAU: Optionnel, pour ajouter une petite bordure blanche autour du logo */
+    max-width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
     border: 2px solid rgba(255, 255, 255, 0.1); 
-    box-shadow: 0 0 15px rgba(135, 116, 225, 0.4); /* NOUVEAU: Ombre pour le faire ressortir */
+    box-shadow: 0 0 15px rgba(135, 116, 225, 0.4);
 }
 
 .header-hidden {
@@ -69,10 +67,10 @@ main.fade-out {
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem; /* Plus d'espacement */
+    gap: 1.5rem;
 }
 
-/* --- NOUVEAU : Animation d'apparition des cartes --- */
+/* --- Animation d'apparition des cartes --- */
 @keyframes cardAppear {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
@@ -84,9 +82,7 @@ main.fade-out {
     border-radius: var(--border-radius);
     overflow: hidden;
     text-align: center;
-    /* NOUVEAU : Bordure subtile */
     border: 1px solid var(--border-color);
-    /* NOUVEAU : Ombre plus douce */
     box-shadow: 0 5px 15px var(--shadow-color);
     cursor: pointer;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
@@ -94,11 +90,9 @@ main.fade-out {
     color: var(--text-color);
     display: flex;
     flex-direction: column;
-    /* NOUVEAU : Application de l'animation */
     animation: cardAppear 0.5s ease-out backwards;
 }
 
-/* NOUVEAU : Appliquer un délai d'animation progressif aux cartes */
 .card:nth-child(2) { animation-delay: 0.05s; }
 .card:nth-child(3) { animation-delay: 0.1s; }
 .card:nth-child(4) { animation-delay: 0.15s; }
@@ -113,7 +107,7 @@ main.fade-out {
 
 .card img, .card .video-thumbnail {
     width: 100%;
-    height: 140px; /* Un peu plus haut */
+    height: 140px;
     object-fit: cover;
     display: block;
     border-bottom: 1px solid var(--border-color);
@@ -136,14 +130,12 @@ main.fade-out {
     border-radius: var(--border-radius);
     margin-bottom: 2rem;
     background-color: #000;
-    /* NOUVEAU : Ombre portée pour la vidéo */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .product-details h1 {
     font-size: 2.2rem;
     margin: 0 0 0.5rem 0;
-    /* NOUVEAU : Dégradé de texte */
     background: linear-gradient(45deg, var(--text-color), var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -166,7 +158,6 @@ main.fade-out {
     letter-spacing: 0.5px;
 }
 
-/* NOUVEAU : Style "pilule" pour les listes */
 .product-details ul {
     list-style: none;
     padding: 0;
@@ -180,7 +171,7 @@ main.fade-out {
     background-color: var(--secondary-bg);
     border: 1px solid var(--border-color);
     padding: 0.5rem 1rem;
-    border-radius: 50px; /* Forme de pilule */
+    border-radius: 50px;
     font-size: 0.9rem;
     transition: all var(--transition-speed) ease;
 }
@@ -191,3 +182,81 @@ main.fade-out {
     border-color: var(--accent-color);
 }
 
+.order-button {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    margin: 2rem auto 0 auto;
+    padding: 15px;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.order-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--glow-color);
+}
+
+/* Style de la barre de navigation en bas */
+#bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background-color: var(--primary-bg);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-button.active {
+    color: var(--accent-color);
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.nav-text {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+/* Classe pour cacher des éléments */
+.hide {
+    display: none !important;
+}
+
+/* Style pour la page d'infos */
+.info-page {
+    padding: 1rem;
+    line-height: 1.6;
+}
+
+.info-page h1 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}

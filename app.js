@@ -1,7 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- LIENS TELEGRAM ---
+    const TELEGRAM_CONTACT = "fernandonewdrop";
+    const TELEGRAM_CANAL = "newdrop"; // <--- REMPLACEZ PAR LE NOM DE VOTRE CANAL
 
-    // --- DONNÉES DE L'APPLICATION ---
+    // --- TEXTE DE LA PAGE INFOS ---
+    const INFO_TEXT = `
+        <div class="info-page">
+            <h1>Informations</h1>
+            <p>
+                ...
+            </p>
+            <p>
+                ...
+            </p>
+        </div>
+    `;
+
+    // --- DONNÉES DE L'APPLICATION (avec votre formatage) ---
     const data = {
         categories: [
             { id: 1, name: "Hash", image: "assets/categories/hash.png" },
@@ -9,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 3, name: "Neige", image: "assets/categories/neige.png" },
             { id: 4, name: "Extazy", image: "assets/categories/extazy.png" },
             { id: 5, name: "Promotions", image: "assets/categories/promotions.png" },
-            { id: 6, name: "Bosseur", image: "assets/categories/bosseur.png" },
+            { id: 6, name: "Revendeur", image: "assets/categories/Revendeur.png" },
         ],
         products: [
             // --- WEED ---
@@ -38,11 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 taste: "Agrumes, Citron, Terreux",
                 terpenes: ["Limonène", "Myrcène"],
                 prices: [{ weight: "5g", price: "70€" },{ weight: "10g", price: "120€" }],
-  
- 
-  
-},
-            
+            },
             // --- HASH ---
             { 
                 id: 201, categoryId: 1, name: "Royal Hash",
@@ -71,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 terpenes: ["Pinène", "Humulène"],
                 prices: [{ weight: "0,5g", price: "50€" }, { weight: "1g", price: "80€" }, { weight: "3g", price: "200€" }] 
             },
-            
             // --- AUTRES PRODUITS ---
             {
                 id: 301, categoryId: 3, name: "Flocon Pur",
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 prices: [{ weight: "Pack", price: "150€" }]
             },
             {
-                id: 601, categoryId: 6, name: "Kit du Bosseur",
+                id: 601, categoryId: 6, name: "Kit du Revendeur",
                 video: "assets/videos/kit.mp4", thumbnail: "assets/thumbnails/kit.jpg",
                 farm: "WorkHard Co.",
                 taste: "Énergisant",
@@ -110,14 +121,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const app = document.getElementById('app');
     const header = document.getElementById('app-header');
+    const navHome = document.getElementById('nav-home');
+    const navInfos = document.getElementById('nav-infos');
+    const navCanal = document.getElementById('nav-canal');
+    const navContact = document.getElementById('nav-contact');
 
-    // Le reste du code (API Telegram, fonctions, router...) reste inchangé.
+    navCanal.href = `https://t.me/${TELEGRAM_CANAL}`;
+    navCanal.target = '_blank';
+    navContact.href = `https://t.me/${TELEGRAM_CONTACT}`;
+    navContact.target = '_blank';
+    
     try {
         const tg = window.Telegram.WebApp;
         tg.ready();
+        tg.setHeaderColor('#000000');
+        tg.setBackgroundColor('#000000');
         tg.BackButton.onClick(() => { window.history.back(); });
         function updateTelegramBackButton() {
-            if (location.hash === '' || location.hash === '#home') {
+            if (['', '#home', '#infos'].includes(location.hash)) {
                 tg.BackButton.hide();
             } else {
                 tg.BackButton.show();
@@ -125,58 +146,62 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch (e) { console.error("L'API Telegram n'est pas disponible.", e); }
     
+    function updateNavState(currentPage) {
+        navHome.classList.remove('active', 'hide');
+        navInfos.classList.remove('active', 'hide');
+        navCanal.classList.remove('active', 'hide');
+        navContact.classList.remove('active', 'hide');
+
+        if (currentPage === 'home') {
+            navHome.classList.add('active', 'hide');
+        } else if (currentPage === 'infos') {
+            navInfos.classList.add('active');
+            navHome.classList.remove('hide');
+        } else if (currentPage === 'product') {
+            navContact.classList.add('hide');
+            navHome.classList.remove('hide');
+        } else {
+             navHome.classList.remove('hide');
+        }
+    }
+    
     function renderHome() {
+        updateNavState('home');
         header.classList.remove('header-hidden');
         let html = '<div class="grid">';
         data.categories.forEach(category => {
-            html += `
-                <a href="#category/${category.id}" class="card">
-                    <img src="${category.image}" alt="${category.name}">
-                    <div class="card-name">${category.name}</div>
-                </a>
-            `;
+            html += `<a href="#category/${category.id}" class="card"><img src="${category.image}" alt="${category.name}"><div class="card-name">${category.name}</div></a>`;
         });
         html += '</div>';
         app.innerHTML = html;
     }
 
     function renderCategory(categoryId) {
+        updateNavState('category');
         header.classList.remove('header-hidden');
         const products = data.products.filter(p => p.categoryId === categoryId);
-        
         if (products.length === 0) {
             app.innerHTML = `<p style="text-align: center; padding-top: 2rem;">Aucun produit dans cette catégorie pour le moment.</p>`;
             return;
         }
-
         let html = '<div class="grid">';
         products.forEach(product => {
-            html += `
-                <a href="#product/${product.id}" class="card">
-                    <img src="${product.thumbnail}" alt="${product.name}" class="video-thumbnail">
-                    <div class="card-name">${product.name}</div>
-                </a>
-            `;
+            html += `<a href="#product/${product.id}" class="card"><img src="${product.thumbnail}" alt="${product.name}" class="video-thumbnail"><div class="card-name">${product.name}</div></a>`;
         });
         html += '</div>';
         app.innerHTML = html;
     }
     
     function renderProduct(productId) {
+        updateNavState('product');
         header.classList.add('header-hidden');
         const product = data.products.find(p => p.id === productId);
         const terpenesList = product.terpenes.map(t => `<li>${t}</li>`).join('');
         const pricesList = product.prices.map(p => `<li>${p.weight} – ${p.price}</li>`).join('');
-
         let typeHtml = '';
         if (product.type) {
-            typeHtml = `
-                <div class="detail-item">
-                    <strong>Type:</strong> ${product.type}
-                </div>
-            `;
+            typeHtml = `<div class="detail-item"><strong>Type:</strong> ${product.type}</div>`;
         }
-
         app.innerHTML = `
             <div class="product-view">
                 <video class="product-video" src="${product.video}" controls autoplay muted loop playsinline></video>
@@ -187,8 +212,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="detail-item"><strong>Goût:</strong> ${product.taste}</div>
                     <div class="detail-item"><strong>Infos:</strong><ul>${terpenesList}</ul></div>
                     <div class="detail-item"><strong>Prix:</strong><ul>${pricesList}</ul></div>
+                    <a href="https://t.me/${TELEGRAM_CONTACT}" target="_blank" class="order-button">
+                        Commander sur Telegram 🚀
+                    </a>
                 </div>
             </div>`;
+    }
+
+    function renderInfosPage() {
+        updateNavState('infos');
+        header.classList.remove('header-hidden');
+        app.innerHTML = INFO_TEXT;
     }
 
     function router() {
@@ -200,16 +234,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderCategory(parseInt(hash.split('/')[1]));
             } else if (hash.startsWith('#product/')) {
                 renderProduct(parseInt(hash.split('/')[1]));
-            } else {
+            } else if (hash === '#infos') {
+                renderInfosPage();
+            }
+            else {
                 renderHome();
             }
 
             app.classList.remove('fade-out');
             window.scrollTo(0, 0);
-
-            if (window.Telegram.WebApp) {
-                updateTelegramBackButton();
-            }
+            if (window.Telegram.WebApp) { updateTelegramBackButton(); }
         }, 150);
     }
     
@@ -217,7 +251,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialHash = location.hash;
     location.hash = ''; 
     location.hash = initialHash || '#home';
-    if (!initialHash) {
-        router();
-    }
+    if (!initialHash) { router(); }
 });
