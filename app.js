@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h1>Informations</h1>
             <p>
                 ...
-            </p>
-            <p>
+            
                 ...
             </p>
         </div>
