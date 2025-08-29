@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // AJOUTÉ : Le nom d'utilisateur de votre contact Telegram (sans le @)
+    const TELEGRAM_CONTACT = "fernandonewdrop";
 
     // --- DONNÉES DE L'APPLICATION ---
     const data = {
@@ -30,19 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 prices: [{ weight: "5g", price: "80€" }, { weight: "10g", price: "140€" }]
             },
             {
-                id: 103,
+                id: 103, categoryId: 2, name: "Amnesia Haze",
                 video: "assets/videos/amnesia_haze.mp4",thumbnail: "assets/thumbnails/amnesia_haze.jpg",
-                categoryId: 2,
-                name: "Amnesia Haze",
                 farm: "Dutch Passion",
                 taste: "Agrumes, Citron, Terreux",
                 terpenes: ["Limonène", "Myrcène"],
-                prices: [{ weight: "5g", price: "70€" },{ weight: "10g", price: "120€" }],
-  
- 
-  
-},
-            
+                prices: [{ weight: "5g", price: "70€" },{ weight: "10g", price: "120€" }]
+            },
             // --- HASH ---
             { 
                 id: 201, categoryId: 1, name: "Royal Hash",
@@ -71,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 terpenes: ["Pinène", "Humulène"],
                 prices: [{ weight: "0,5g", price: "50€" }, { weight: "1g", price: "80€" }, { weight: "3g", price: "200€" }] 
             },
-            
             // --- AUTRES PRODUITS ---
             {
                 id: 301, categoryId: 3, name: "Flocon Pur",
@@ -111,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app');
     const header = document.getElementById('app-header');
 
-    // Le reste du code (API Telegram, fonctions, router...) reste inchangé.
     try {
         const tg = window.Telegram.WebApp;
         tg.ready();
@@ -187,6 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="detail-item"><strong>Goût:</strong> ${product.taste}</div>
                     <div class="detail-item"><strong>Infos:</strong><ul>${terpenesList}</ul></div>
                     <div class="detail-item"><strong>Prix:</strong><ul>${pricesList}</ul></div>
+
+                    <a href="https://t.me/${TELEGRAM_CONTACT}" target="_blank" class="order-button">
+                        Commander sur Telegram 🚀
+                    </a>
                 </div>
             </div>`;
     }
