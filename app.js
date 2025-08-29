@@ -9,12 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="info-page">
             <h1>Informations</h1>
             <p>
-                Ceci est le texte de la page d'informations. Vous pouvez modifier ce contenu
-                directement dans la constante <strong>INFO_TEXT</strong> en haut du fichier <strong>app.js</strong>.
+                ...
             </p>
             <p>
-                Vous pouvez y mettre des instructions de commande, des mentions légales,
-                ou toute autre information utile for vos clients.
+                ...
             </p>
         </div>
     `;
