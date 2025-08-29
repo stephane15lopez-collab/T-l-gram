@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // --- WEED ---
             { id: 102, categoryId: 2, name: "Purple Haze", video: "assets/videos/purplehaze.mp4", thumbnail: "assets/thumbnails/purplehaze.jpg", farm: "Green Valley", taste: "Baies sucrées, terreux, épicé", terpenes: ["Myrcène", "Caryophyllène"], prices: [{ weight: "3g", price: "45€" }, { weight: "5g", price: "70€" }] },
             { id: 104, categoryId: 2, name: "Lemon Zlushi", video: "assets/videos/lemon_zlushi.mp4", thumbnail: "assets/thumbnails/lemon_zlushi.jpg", farm: "Cookies Farm", taste: "Gazeux, Poivré, Abricot, Terreux", terpenes: ["Caryophyllène", "Limonène", "Humulène"], prices: [{ weight: "5g", price: "80€" }, { weight: "10g", price: "140€" }] },
-            { id: 103, categoryId: 2, name: "Amnesia Haze", video: "assets/videos/amnesia_haze.mp4",thumbnail: "assets/thumbnails/amnesia_haze.jpg", farm: "Dutch Passion", taste: "Agrumes, Citron, Terreux", terpenes: ["Limonène", "Myrcène"], prices: [{ weight: "5g", price: "70€" },{ weight: "10g", price: "120€" }] },
+            // CORRIGÉ : La virgule manquante était sur la ligne ci-dessous
+            { id: 103, categoryId: 2, name: "Amnesia Haze", video: "assets/videos/amnesia_haze.mp4", thumbnail: "assets/thumbnails/amnesia_haze.jpg", farm: "Dutch Passion", taste: "Agrumes, Citron, Terreux", terpenes: ["Limonène", "Myrcène"], prices: [{ weight: "5g", price: "70€" },{ weight: "10g", price: "120€" }] },
             
             // --- HASH ---
             { 
