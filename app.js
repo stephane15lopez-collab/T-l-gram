@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LIENS TELEGRAM ---
     const TELEGRAM_CONTACT = "fernandonewdrop";
-    const TELEGRAM_CANAL = "nomducanal"; // <--- REMPLACEZ PAR LE NOM DE VOTRE CANAL
+    const TELEGRAM_CANAL = "newdrop"; // <--- REMPLACEZ PAR LE NOM DE VOTRE CANAL
 
     // --- TEXTE DE LA PAGE INFOS ---
     const INFO_TEXT = `
