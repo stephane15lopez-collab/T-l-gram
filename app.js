@@ -14,19 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>
                 ‼️Allez sur Notre application pour voir notre manu et commander ‼️</p>
                 <p>
-                🚨Tout se qui est posté sur l’application est disponibles au menu  🚨</p>
+                🚨Tout ce qui est posté sur l’application est disponible au menu  🚨</p>
                 <p>
                 ✅Ouvert de 13h à  23h ⏰
                        7/7🌝🌚</p>
                 <p>
-                ✅  Prise de commandes et Livraison Rapide ⚡️🏎️</p>
+                ✅  Prise de commande et Livraison Rapide ⚡️🏎️</p>
                 <p>
-                ✅ paiement en espèces 💸
-                      Ou paysafe 💳</p>
+                ✅ Paiement en espèces 💸
+                      ou Paysafe 💳</p>
                 <p>
-                ✅ Envoie dans toute la France ✈️📦</p>
+                ✅ Envoi dans toute la France ✈️📦</p>
                 <p>
-                ✅ Meet-Up proche de Pau adresse en privée 📍
+                ✅ Meet-Up proche de Pau adresse en privé 📍
 
             </p>
         </div>
