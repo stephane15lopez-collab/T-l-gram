@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
     // --- DONNÉES DE L'APPLICATION ---
     const data = {
         categories: [

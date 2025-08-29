@@ -22,8 +22,8 @@ body {
     /* --- PROPRIÉTÉS POUR L'ARRIÈRE-PLAN --- */
     background-image: 
     linear-gradient(rgba(17, 19, 21, 0.85), rgba(17, 19, 21, 0.85)),
-    url('assets/background.jpg'); /* Chemin vers votre image */
-    background-size: cover;          /* L'image couvre tout l'écran, sans se déformer */
+    url('assets/background.png'); /* Chemin vers votre image */
+    background-size: contain;          /* L'image couvre tout l'écran, sans se déformer */
     background-position: center;     /* L'image est bien centrée */
     background-attachment: fixed;    /* L'image reste fixe quand on fait défiler la page */
     background-repeat: no-repeat;    /* L'image ne se répète pas */
@@ -190,3 +190,4 @@ main.fade-out {
     color: white;
     border-color: var(--accent-color);
 }
+
