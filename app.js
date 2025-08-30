@@ -1,3 +1,23 @@
+// Fonction pour gérer le clic sur une catégorie avec un délai
+function handleCategoryClick(event) {
+    // 1. Empêche le lien de changer de page immédiatement
+    event.preventDefault();
+    
+    const link = event.currentTarget;
+    const destination = link.getAttribute('href');
+
+    // 2. Retire l'effet lumineux de toutes les autres cartes (sécurité)
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('glow'));
+
+    // 3. Ajoute l'effet lumineux à la carte cliquée
+    link.classList.add('glow');
+
+    // 4. Attend 500ms, puis change de page
+    setTimeout(() => {
+        window.location.hash = destination;
+    }, 500); // 500 millisecondes = une demi-seconde
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LIENS TELEGRAM ---
@@ -68,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 103,
-                video: "assets/videos/amnesia_haze.mp4", thumbnail: "assets/thumbnails/amnesia_haze.jpg", // Virgule corrigée ici
+                video: "assets/videos/amnesia_haze.mp4", thumbnail: "assets/thumbnails/amnesia_haze.jpg", // Virgule corrigée ici pour éviter les bugs
                 categoryId: 2,
                 name: "Amnesia Haze",
                 farm: "Dutch Passion",
@@ -172,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navInfos.classList.remove('active', 'hide');
         navCanal.classList.remove('active', 'hide');
         navContact.classList.remove('active', 'hide');
-
         if (currentPage === 'home') {
             navHome.classList.add('active', 'hide');
         } else if (currentPage === 'infos') {
@@ -189,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderHome() {
         updateNavState('home');
         header.classList.remove('header-hidden');
-        // MODIFIÉ : Ajout des classes de couleur pour le CSS
         const colorClasses = {
             1: 'card-hash', 2: 'card-weed', 3: 'card-neige', 
             4: 'card-extazy', 5: 'card-promo', 6: 'card-revendeur'
@@ -197,10 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let html = '<div class="grid">';
         data.categories.forEach(category => {
             const colorClass = colorClasses[category.id] || '';
-            html += `<a href="#category/${category.id}" class="card ${colorClass}"><img src="${category.image}" alt="${category.name}"><div class="card-name">${category.name}</div></a>`;
+            html += `<a href="#category/${category.id}" class="card ${colorClass}" onclick="handleCategoryClick(event)"><img src="${category.image}" alt="${category.name}"><div class="card-name">${category.name}</div></a>`;
         });
         html += '</div>';
         app.innerHTML = html;
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('glow'));
     }
 
     function renderCategory(categoryId) {
@@ -256,18 +275,15 @@ document.addEventListener('DOMContentLoaded', () => {
         app.classList.add('fade-out');
         setTimeout(() => {
             const hash = location.hash;
-            
             if (hash.startsWith('#category/')) {
                 renderCategory(parseInt(hash.split('/')[1]));
             } else if (hash.startsWith('#product/')) {
                 renderProduct(parseInt(hash.split('/')[1]));
             } else if (hash === '#infos') {
                 renderInfosPage();
-            }
-            else {
+            } else {
                 renderHome();
             }
-
             app.classList.remove('fade-out');
             window.scrollTo(0, 0);
             if (window.Telegram.WebApp) { updateTelegramBackButton(); }
