@@ -9,10 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="info-page">
             <h1>Informations</h1>
             <p>
-                ...
-            </p>
-            <p>
-                ...
+                Bienvenue la famille 👋 nous sommes heureux de vous accueillir sur New Drop ici vous trouverez un large choix de drogue de qualité exceptionnelles ✅
+                Provenant du monde entier 🌍</p>
+                <p>
+                ‼️Allez sur Notre application pour voir notre manu et commander ‼️</p>
+                <p>
+                🚨Tout ce qui est posté sur l’application est disponible au menu  🚨</p>
+                <p>
+                ✅Ouvert de 13h à  23h ⏰
+                       7/7🌝🌚</p>
+                <p>
+                ✅  Prise de commande et Livraison Rapide ⚡️🏎️</p>
+                <p>
+                ✅ Paiement en espèces 💸
+                      ou Paysafe 💳</p>
+                <p>
+                ✅ Envoi dans toute la France ✈️📦</p>
+                <p>
+                ✅ Meet-Up proche de Pau adresse en privé 📍
+
             </p>
         </div>
     `;
