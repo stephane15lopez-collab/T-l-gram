@@ -10,6 +10,14 @@
     --border-color: rgba(255, 255, 255, 0.08);
     --border-radius: 16px;
     --transition-speed: 0.3s;
+
+    /* NOUVEAU : Couleurs de surbrillance pour les catégories */
+    --hash-glow: rgba(255, 255, 0, 0.5); /* Jaune */
+    --weed-glow: rgba(0, 255, 0, 0.5); /* Vert */
+    --neige-glow: rgba(0, 191, 255, 0.5); /* Bleu */
+    --extazy-glow: rgba(255, 0, 0, 0.5); /* Rouge */
+    --promo-glow: rgba(255, 105, 180, 0.5); /* Rose */
+    --revendeur-glow: rgba(147, 112, 219, 0.5); /* Violet */
 }
 
 body {
@@ -99,11 +107,40 @@ main.fade-out {
 .card:nth-child(5) { animation-delay: 0.2s; }
 .card:nth-child(6) { animation-delay: 0.25s; }
 
+.card-hash:hover {
+    border-color: yellow;
+    box-shadow: 0 2px 15px yellow;
+}
+
+.card-weed:hover {
+    border-color: green;
+    box-shadow: 0 2px 15px green;
+}
+
+.card-neige:hover {
+    border-color: skyblue;
+    box-shadow: 0 2px 15px skyblue;
+}
+
+.card-extazy:hover {
+    border-color: red;
+    box-shadow: 0 2px 15px red;
+}
+
+.card-promo:hover {
+    border-color: fuchsia;
+    box-shadow: 0 2px 15px fuchsia;
+}
+
+.card-revendeur:hover {
+    border-color: purple;
+    box-shadow: 0 2px 15px purple;
+}
+
 .card:hover {
     transform: translateY(-8px);
-    border-color: var(--accent-color);
-    box-shadow: 0 10px 25px var(--shadow-color), 0 0 20px var(--glow-color);
 }
+
 
 .card img, .card .video-thumbnail {
     width: 100%;
@@ -119,6 +156,33 @@ main.fade-out {
     font-size: 1rem;
     margin-top: auto;
 }
+
+/* NOUVEAU : Styles de surbrillance pour les cartes de catégorie */
+.card.active-category.hash-glow {
+    border-color: yellow;
+    box-shadow: 0 0 20px var(--hash-glow);
+}
+.card.active-category.weed-glow {
+    border-color: limegreen;
+    box-shadow: 0 0 20px var(--weed-glow);
+}
+.card.active-category.neige-glow {
+    border-color: deepskyblue;
+    box-shadow: 0 0 20px var(--neige-glow);
+}
+.card.active-category.extazy-glow {
+    border-color: red;
+    box-shadow: 0 0 20px var(--extazy-glow);
+}
+.card.active-category.promo-glow {
+    border-color: hotpink;
+    box-shadow: 0 0 20px var(--promo-glow);
+}
+.card.active-category.revendeur-glow {
+    border-color: mediumpurple;
+    box-shadow: 0 0 20px var(--revendeur-glow);
+}
+
 
 /* --- Page Produit (Améliorée) --- */
 .product-view {
@@ -210,13 +274,14 @@ main.fade-out {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100px;
+    height: 65px;
     background-color: var(--primary-bg);
     border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: space-around;
     align-items: center;
     box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.25);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .nav-button {
@@ -236,7 +301,7 @@ main.fade-out {
 
 .nav-icon {
     font-size: 1.5rem;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .nav-text {
