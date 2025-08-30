@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LIENS TELEGRAM ---
     const TELEGRAM_CONTACT = "fernandonewdrop";
-    const TELEGRAM_CANAL = "newdrop"; // <--- REMPLACEZ PAR LE NOM DE VOTRE CANAL
+    const TELEGRAM_CANAL = "newdrop";
 
     // --- TEXTE DE LA PAGE INFOS ---
     const INFO_TEXT = `
@@ -10,24 +10,30 @@ document.addEventListener('DOMContentLoaded', () => {
             <h1>Informations</h1>
             <p>
                 Bienvenue la famille 👋 nous sommes heureux de vous accueillir sur New Drop ici vous trouverez un large choix de drogue de qualité exceptionnelles ✅
-                Provenant du monde entier 🌍</p>
-                <p>
-                ‼️Allez sur Notre application pour voir notre manu et commander ‼️</p>
-                <p>
-                🚨Tout ce qui est posté sur l’application est disponible au menu  🚨</p>
-                <p>
-                ✅Ouvert de 13h à  23h ⏰
-                       7/7🌝🌚</p>
-                <p>
-                ✅  Prise de commande et Livraison Rapide ⚡️🏎️</p>
-                <p>
+                Provenant du monde entier 🌍
+            </p>
+            <p>
+                ‼️Allez sur Notre application pour voir notre manu et commander ‼️
+            </p>
+            <p>
+                🚨Tout ce qui est posté sur l’application est disponible au menu  🚨
+            </p>
+            <p>
+                ✅Ouvert de 13h à  23h ⏰
+                                7/7🌝🌚
+            </p>
+            <p>
+                ✅  Prise de commande et Livraison Rapide ⚡️🏎️
+            </p>
+            <p>
                 ✅ Paiement en espèces 💸
-                      ou Paysafe 💳</p>
-                <p>
-                ✅ Envoi dans toute la France ✈️📦</p>
-                <p>
+                                ou Paysafe 💳
+            </p>
+            <p>
+                ✅ Envoi dans toute la France ✈️📦
+            </p>
+            <p>
                 ✅ Meet-Up proche de Pau adresse en privé 📍
-
             </p>
         </div>
     `;
@@ -62,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 103,
-                video: "assets/videos/amnesia_haze.mp4",thumbnail: "assets/thumbnails/amnesia_haze.jpg",
+                video: "assets/videos/amnesia_haze.mp4", thumbnail: "assets/thumbnails/amnesia_haze.jpg", // Virgule corrigée ici
                 categoryId: 2,
                 name: "Amnesia Haze",
                 farm: "Dutch Passion",
@@ -183,9 +189,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderHome() {
         updateNavState('home');
         header.classList.remove('header-hidden');
+        // MODIFIÉ : Ajout des classes de couleur pour le CSS
+        const colorClasses = {
+            1: 'card-hash', 2: 'card-weed', 3: 'card-neige', 
+            4: 'card-extazy', 5: 'card-promo', 6: 'card-revendeur'
+        };
         let html = '<div class="grid">';
         data.categories.forEach(category => {
-            html += `<a href="#category/${category.id}" class="card"><img src="${category.image}" alt="${category.name}"><div class="card-name">${category.name}</div></a>`;
+            const colorClass = colorClasses[category.id] || '';
+            html += `<a href="#category/${category.id}" class="card ${colorClass}"><img src="${category.image}" alt="${category.name}"><div class="card-name">${category.name}</div></a>`;
         });
         html += '</div>';
         app.innerHTML = html;
