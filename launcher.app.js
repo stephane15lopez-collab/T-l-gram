@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- PERSONNALISATION ---
-    const LIEN_VERS_CATALOGUE = "https://github.com/stephane15lopez-collab/T-l-gram/index.html"; 
+    const LIEN_VERS_CATALOGUE = "https://stephane15lopez-collab.github.io/T-l-gram/"; 
 
     const PAGE_CONTACT_HTML = `
         <div class="content-page">
