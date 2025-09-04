@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LIENS TELEGRAM ---
     const TELEGRAM_CONTACT = "fernandonewdrop";
-    const TELEGRAM_CANAL = "newdrop";
+    const POTATO_CANAL = "https://ptwdym158.org/helicoco";
 
     // --- TEXTE DE LA PAGE INFOS ---
     const INFO_TEXT = `
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navCanal = document.getElementById('nav-canal');
     const navContact = document.getElementById('nav-contact');
 
-    navCanal.href = `https://t.me/${TELEGRAM_CANAL}`;
+    navCanal.href = POTATO_CANAL;
     navCanal.target = '_blank';
     navContact.href = `https://t.me/${TELEGRAM_CONTACT}`;
     navContact.target = '_blank';
