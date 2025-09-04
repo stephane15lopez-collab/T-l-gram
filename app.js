@@ -36,14 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 ‼️Allez sur Notre application pour voir notre manu et commander ‼️
             </p>
             <p>
-                🚨Tout ce qui est posté sur l’application est disponible au menu  🚨
+                🚨Tout ce qui est posté sur l’application est disponible au menu  🚨
             </p>
             <p>
-                ✅Ouvert de 13h à  23h ⏰
+                ✅Ouvert de 13h à  23h ⏰
                                 7/7🌝🌚
             </p>
             <p>
-                ✅  Prise de commande et Livraison Rapide ⚡️🏎️
+                ✅  Prise de commande et Livraison Rapide ⚡️🏎️
             </p>
             <p>
                 ✅ Paiement en espèces 💸
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 id: 103,
-                video: "assets/videos/amnesia_haze.mp4", thumbnail: "assets/thumbnails/amnesia_haze.jpg", // Virgule corrigée ici pour éviter les bugs
+                video: "assets/videos/amnesia_haze.mp4", thumbnail: "assets/thumbnails/amnesia_haze.jpg",
                 categoryId: 2,
                 name: "Amnesia Haze",
                 farm: "Dutch Passion",
@@ -188,21 +188,25 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) { console.error("L'API Telegram n'est pas disponible.", e); }
     
     function updateNavState(currentPage) {
+        // 1. On réinitialise d'abord l'état de tous les boutons (visibles et non actifs)
         navHome.classList.remove('active', 'hide');
         navInfos.classList.remove('active', 'hide');
         navCanal.classList.remove('active', 'hide');
         navContact.classList.remove('active', 'hide');
+
+        // 2. On applique les règles spécifiques à la page actuelle
         if (currentPage === 'home') {
-            navHome.classList.add('active', 'hide');
+            // Sur la page d'accueil, on active ET on cache le bouton "home"
+            navHome.classList.add('active', 'hide'); 
         } else if (currentPage === 'infos') {
+            // Sur la page d'infos, on active le bouton "infos" et on s'assure que les autres sont visibles
             navInfos.classList.add('active');
-            navHome.classList.remove('hide');
         } else if (currentPage === 'product') {
+            // Sur une page produit, on cache le bouton "contact"
             navContact.classList.add('hide');
-            navHome.classList.remove('hide');
-        } else {
-             navHome.classList.remove('hide');
         }
+        // Note : sur une page 'category', aucune règle spéciale ne s'applique,
+        // donc tous les boutons restent visibles et aucun n'est actif, ce qui est le comportement souhaité.
     }
     
     function renderHome() {

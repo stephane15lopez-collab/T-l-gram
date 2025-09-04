@@ -32,7 +32,8 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    padding-bottom: 80px;
+    /* Augmenté pour laisser de la place à la nouvelle barre de nav */
+    padding-bottom: 100px;
 }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -96,12 +97,60 @@ main.fade-out { opacity: 0; transition: opacity calc(var(--transition-speed) / 2
 .order-button { display: block; width: 100%; max-width: 250px; margin: 2rem auto 0 auto; padding: 15px; background-color: var(--accent-color); color: #ffffff; text-align: center; text-decoration: none; font-size: 1.1rem; font-weight: bold; border-radius: var(--border-radius); transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
 .order-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px var(--glow-color); }
 
-#bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background-color: var(--primary-bg); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.25); padding-bottom: env(safe-area-inset-bottom); }
-.nav-button { display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; color: var(--text-muted); text-decoration: none; transition: color 0.2s ease; }
-.nav-button.active { color: var(--accent-color); }
-.nav-icon { font-size: 1.5rem; margin-bottom: 4px; }
-.nav-text { font-size: 0.7rem; font-weight: 500; }
-.hide { display: none !important; }
+/* --- NOUVEAUX STYLES POUR LA BARRE DE NAVIGATION FLOTTANTE --- */
+#bottom-nav {
+    position: fixed;
+    /* On la décolle un peu du bas */
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    display: flex;
+    gap: 8px; /* Espace entre les icônes */
+    padding: 8px;
+    
+    /* Le look "verre dépoli" */
+    background-color: rgba(28, 31, 34, 0.75); /* var(--secondary-bg) avec transparence */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* Pour la compatibilité Safari */
+    
+    border: 1px solid var(--border-color);
+    border-radius: 50px; /* Pour l'effet "pilule" */
+    box-shadow: 0 8px 32px var(--shadow-color);
+    
+    /* S'assure qu'elle est au-dessus du contenu */
+    z-index: 1000; 
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 48px;  /* Taille du cercle */
+    height: 48px;
+    
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 50%; /* Rend le bouton circulaire */
+    
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.nav-icon {
+    font-size: 1.8rem; /* Icônes un peu plus grandes */
+    /* On retire la marge du bas car il n'y a plus de texte */
+    margin-bottom: 0; 
+}
+
+/* Style pour le bouton ACTIF */
+.nav-button.active {
+    background-color: var(--text-color); /* Le fond devient blanc */
+    color: var(--primary-bg); /* L'icône devient noire */
+}
+
+/* On n'a plus besoin de cacher le bouton, donc cette classe peut être retirée */
+.hide { display: none !important; } 
 
 .info-page { padding: 1rem; line-height: 1.6; }
 .info-page h1 { font-size: 2rem; color: var(--accent-color); margin-bottom: 1.5rem; }
